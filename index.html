@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NS-3 Installation Guide - Step by Step</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .step {
+            background: #f8f9fa;
+            border-left: 5px solid #667eea;
+            padding: 25px;
+            margin-bottom: 25px;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .step:hover {
+            transform: translateX(10px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .step-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .step-number {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2em;
+            margin-right: 15px;
+        }
+
+        .step-title {
+            font-size: 1.3em;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .step-content {
+            padding-left: 55px;
+        }
+
+        .step-content p {
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+
+        .code-block {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            margin: 15px 0;
+            overflow-x: auto;
+            position: relative;
+        }
+
+        .code-block code {
+            font-size: 0.95em;
+        }
+
+        .copy-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 5px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.85em;
+            transition: background 0.3s;
+        }
+
+        .copy-btn:hover {
+            background: #5568d3;
+        }
+
+        .note {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+
+        .note strong {
+            color: #856404;
+        }
+
+        .info-box {
+            background: #d1ecf1;
+            border-left: 4px solid #17a2b8;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e9ecef;
+            border-radius: 10px;
+            margin: 30px 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+
+        footer {
+            background: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+        }
+
+        .completed {
+            opacity: 0.7;
+        }
+
+        .completed .step-number {
+            background: #28a745;
+        }
+
+        .completed .step {
+            border-left-color: #28a745;
+        }
+
+        .img {
+            display: block;
+            max-width: 520px;
+            width: 100%;
+            max-height: 240px;
+            margin: 15px auto;
+            object-fit: cover;
+            object-position: top;
+            border-radius: 10px;
+
+            /* Dark blue shadow for images */
+            box-shadow: 0 8px 18px rgba(15, 23, 42, 0.18);
+
+            border: 1px solid #e5e7eb;
+            background-color: #ffffff;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>🌐 NS-3 Installation Guide</h1>
+            <p>Complete Step-by-Step Tutorial for Intelligent Network Setup</p>
+        </header>
+
+        <div class="content">
+
+            <div class="step">
+                <div class="step-header">
+                    <div class="step-number">1</div>
+                    <div class="step-title">Install Oracle VM VirtualBox 7.2.2</div>
+                </div>
+                <div class="step-content">
+                    <p>Download and install Oracle VM VirtualBox to create a virtual environment for NS-3.</p>
+                    <div class="info-box">
+                        <strong>📥 Download:</strong> Visit <a
+                            href="https://www.virtualbox.org/wiki/Download_Old_Builds_7_2"
+                            target="_blank">virtualbox.org</a> and download version 7.2.2
+                    </div>
+                    <p><strong>Installation Steps:</strong></p>
+                    <ul style="margin-left: 20px; line-height: 1.8;">
+                        <li>Run the installer with administrator privileges</li>
+                        <li>Follow the installation wizard</li>
+                        <li>Keep all default settings</li>
+                        <li>Complete the installation and restart if prompted</li>
+                    </ul>
+                </div>
+                <div>
+                    <img class="img" src="1.jpeg" alt="">
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-header">
+                    <div class="step-number">2</div>
+                    <div class="step-title">Download Ubuntu 24.03.0.3</div>
+                </div>
+                <div class="step-content">
+                    <p>Get the Ubuntu ISO file to set up your Linux environment.</p>
+                    <div class="info-box">
+                        <strong>📥 Download:</strong> Visit <a href="https://ubuntu.com/download/desktop"
+                            target="_blank">ubuntu.com</a> and download Ubuntu 24.03.0.3
+                    </div>
+                    <div class="note">
+                        <strong>Note:</strong> The ISO file will be approximately 4-5 GB. Ensure you have sufficient
+                        disk space.
+                    </div>
+                </div>
+                <div>
+                    <img class="img" src="5.jpeg" alt="">
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-header">
+                    <div class="step-number">3</div>
+                    <div class="step-title">Create Ubuntu Virtual Machine</div>
+                </div>
+                <div class="step-content">
+                    <p>Set up a new virtual machine in VirtualBox with the following specifications:</p>
+                    <div class="info-box">
+                        <strong>💾 Recommended Specifications:</strong>
+                        <ul style="margin-left: 20px; margin-top: 10px; line-height: 1.8;">
+                            <li><strong>Memory (RAM):</strong> 4 GB minimum (8 GB recommended)</li>
+                            <li><strong>Hard Disk:</strong> 100 GB</li>
+                            <li><strong>CPU Cores:</strong> 2-4 cores (Cis12 = 6 core)</li>
+                        </ul>
+                    </div>
+                    <p><strong>Steps:</strong></p>
+                    <ul style="margin-left: 20px; line-height: 1.8;">
+                        <li>Open VirtualBox and click "New"</li>
+                        <li>Name: "Ubuntu NS3"</li>
+                        <li>Type: Linux</li>
+                        <li>Version: Ubuntu (64-bit)</li>
+                        <li>Allocate memory and create virtual hard disk</li>
+                        <li>Mount the Ubuntu ISO file</li>
+                    </ul>
+                </div>
+                <div>
+                    <img class="img" src="3.jpeg" alt="">
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-header">
+                    <div class="step-number">4</div>
+                    <div class="step-title">Install Ubuntu Prerequisites for NS-3</div>
+                </div>
+                <div class="step-content">
+                    <p>After installing Ubuntu, update the system and install required packages.</p>
+                    <div class="code-block">
+                        <code>sudo apt update && sudo apt upgrade -y</code>
+                    </div>
+                    <p>Install build tools and dependencies:</p>
+                    <div class="code-block">
+                        <code>sudo apt install -y g++ python3 python3-dev pkg-config sqlite3 cmake python3-setuptools git qtbase5-dev qtchooser qt5-qmake qtbase5-dev-tools gir1.2-goocanvas-2.0 python3-gi python3-gi-cairo python3-pygraphviz gir1.2-gtk-3.0 ipython3 tcpdump wireshark</code>
+                    </div>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-header">
+                    <div class="step-number">5</div>
+                    <div class="step-title">Download NS-3 (Version 3.45 or Latest)</div>
+                </div>
+                <div class="step-content">
+                    <p>Download the NS-3 all-in-one package from the official website.</p>
+                    <div class="info-box">
+                        <strong>📥 Download:</strong> Visit <a href="https://www.nsnam.org/releases/"
+                            target="_blank">nsnam.org/releases</a>
+                    </div>
+                    <p>Or download directly using wget:</p>
+                    <div class="code-block">
+                        <code>cd ~
+wget https://www.nsnam.org/releases/ns-allinone-3.45.tar.bz2
+tar xjf ns-allinone-3.45.tar.bz2
+cd ns-allinone-3.45</code>
+                    </div>
+                </div>
+                <div>
+                    <img class="img" src="7.jpeg" alt="">
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-header">
+                    <div class="step-number">6</div>
+                    <div class="step-title">Install NS-3 in Ubuntu</div>
+                </div>
+                <div class="step-content">
+                    <p>Build and install NS-3 on your Ubuntu system.</p>
+                    <div class="code-block">
+                        <code>cd ns-allinone-3.45
+./build.py --enable-examples --enable-tests</code>
+                    </div>
+                    <div class="note">
+                        <strong>⏱️ Note:</strong> This process may take 15-30 minutes depending on your system
+                        specifications.
+                    </div>
+                    <p>After installation, configure NS-3:</p>
+                    <div class="code-block">
+                        <code>cd ns-3.45
+./ns3 configure --enable-examples --enable-tests
+./ns3 build</code>
+                    </div>
+                    <p>Test your installation:</p>
+                    <div class="code-block">
+                        <code>./ns3 run hello-simulator</code>
+                    </div>
+                    <div class="info-box">
+                        <strong>✅ Success:</strong> If you see "Hello Simulator" output, NS-3 is successfully installed!
+                    </div>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-header">
+                    <div class="step-number">7</div>
+                    <div class="step-title">Find Step-by-Step Installation Resources</div>
+                </div>
+                <div class="step-content">
+                    <p>Access comprehensive tutorials and documentation for detailed guidance.</p>
+                    <div class="info-box">
+                        <strong>📚 Recommended Resources:</strong>
+                        <ul style="margin-left: 20px; margin-top: 10px; line-height: 1.8;">
+                            <li><a href="https://www.nsnam.org/documentation/" target="_blank">Official NS-3
+                                    Documentation</a></li>
+                            <li><a href="https://www.nsnam.org/docs/tutorial/html/" target="_blank">NS-3 Tutorial</a>
+                            </li>
+                            <li>Search Google for "NS-3 installation tutorial" for video guides</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>🎓 NS-3 Installation Guide | Click on steps to mark as completed</p>
+            <p style="margin-top: 10px; font-size: 0.85em;">For more information, visit <a href="https://www.nsnam.org/"
+                    target="_blank">nsnam.org</a></p>
+        </footer>
+    </div>
+
+    <script>
+        function copyCode(btn, event) {
+            event.stopPropagation();
+            const codeBlock = btn.parentElement;
+            const code = codeBlock.querySelector('code').textContent;
+
+            navigator.clipboard.writeText(code).then(() => {
+                btn.textContent = 'Copied!';
+                setTimeout(() => {
+                    btn.textContent = 'Copy';
+                }, 2000);
+            });
+        }
+
+        function toggleComplete(step) {
+            step.classList.toggle('completed');
+            updateProgress();
+        }
+
+        function updateProgress() {
+            const steps = document.querySelectorAll('.step');
+            const completedSteps = document.querySelectorAll('.step.completed');
+            const progress = (completedSteps.length / steps.length) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+        }
+    </script>
+</body>
+
+</html>
